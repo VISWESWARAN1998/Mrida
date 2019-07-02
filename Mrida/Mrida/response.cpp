@@ -11,6 +11,13 @@ std::string send_failure_response()
 	return failed.dump();
 }
 
+std::string send_success_response()
+{
+	json failed;
+	failed["message"] = true;
+	return failed.dump();
+}
+
 std::string threat_info_vector_to_string(std::vector<threat_info> vec)
 {
 	json threat_info_bucket;

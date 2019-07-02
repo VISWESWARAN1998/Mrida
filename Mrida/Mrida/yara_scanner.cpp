@@ -7,9 +7,9 @@
 
 
 
-yara_scanner::yara_scanner()
+yara_scanner::yara_scanner(std::string target)
 {
-	for (auto file : std::experimental::filesystem::recursive_directory_iterator("signatures"))
+	for (auto file : std::experimental::filesystem::recursive_directory_iterator("yara/"+target))
 	{
 		std::string yara_file = file.path().u8string();
 		this->yara.addRuleFile(yara_file);

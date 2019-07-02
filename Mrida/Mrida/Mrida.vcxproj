@@ -127,6 +127,7 @@
     <ClCompile Include="response.cpp" />
     <ClCompile Include="shannon_entropy.cpp" />
     <ClCompile Include="threat_info.cpp" />
+    <ClCompile Include="yara_error_checker.cpp" />
     <ClCompile Include="yara_scanner.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +138,7 @@
     <ClInclude Include="response.h" />
     <ClInclude Include="shannon_entropy.h" />
     <ClInclude Include="threat_info.h" />
+    <ClInclude Include="yara_error_checker.h" />
     <ClInclude Include="yara_scanner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\yara_scanner">
-      <UniqueIdentifier>{7fec78fc-9e10-4be4-b3ea-dae7bd0b95b6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\yara_scanner">
-      <UniqueIdentifier>{3ce16aa1-7709-4a6c-ab9f-c10de3496a62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\http">
       <UniqueIdentifier>{ab337e50-6c09-4397-9ed3-6fba0b573134}</UniqueIdentifier>
     </Filter>
@@ -34,36 +28,48 @@
     <Filter Include="Header Files\anomaly">
       <UniqueIdentifier>{669cca5b-d619-4165-8289-f89fabf613bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\cmd">
+      <UniqueIdentifier>{699e699c-f26b-42fc-a7a1-630c2bb55aa2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\yara">
+      <UniqueIdentifier>{7fec78fc-9e10-4be4-b3ea-dae7bd0b95b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\yara">
+      <UniqueIdentifier>{3ce16aa1-7709-4a6c-ab9f-c10de3496a62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mrida.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="yara_scanner.cpp">
-      <Filter>Source Files\yara_scanner</Filter>
+      <Filter>Source Files\yara</Filter>
     </ClCompile>
     <ClCompile Include="threat_info.cpp">
-      <Filter>Source Files\yara_scanner</Filter>
-    </ClCompile>
-    <ClCompile Include="display.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\yara</Filter>
     </ClCompile>
     <ClCompile Include="response.cpp">
       <Filter>Source Files\http</Filter>
     </ClCompile>
     <ClCompile Include="packer_detector.cpp">
-      <Filter>Source Files\yara_scanner</Filter>
+      <Filter>Source Files\yara</Filter>
     </ClCompile>
     <ClCompile Include="shannon_entropy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="display.cpp">
+      <Filter>Source Files\cmd</Filter>
+    </ClCompile>
+    <ClCompile Include="yara_error_checker.cpp">
+      <Filter>Source Files\yara</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="yara_scanner.h">
-      <Filter>Header Files\yara_scanner</Filter>
+      <Filter>Header Files\yara</Filter>
     </ClInclude>
     <ClInclude Include="threat_info.h">
-      <Filter>Header Files\yara_scanner</Filter>
+      <Filter>Header Files\yara</Filter>
     </ClInclude>
     <ClInclude Include="httplib.h">
       <Filter>Header Files\http</Filter>
@@ -75,13 +81,16 @@
       <Filter>Header Files\cmd</Filter>
     </ClInclude>
     <ClInclude Include="packer_detector.h">
-      <Filter>Header Files\yara_scanner</Filter>
+      <Filter>Header Files\yara</Filter>
     </ClInclude>
     <ClInclude Include="response.h">
       <Filter>Header Files\http</Filter>
     </ClInclude>
     <ClInclude Include="shannon_entropy.h">
       <Filter>Header Files\anomaly</Filter>
+    </ClInclude>
+    <ClInclude Include="yara_error_checker.h">
+      <Filter>Header Files\yara</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

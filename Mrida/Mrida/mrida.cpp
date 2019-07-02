@@ -11,6 +11,7 @@
 #include "display.h"
 #include "packer_detector.h"
 #include "shannon_entropy.h"
+#include "yara_error_checker.h"
 
 int main(int argc, char** argv)
 {
@@ -20,9 +21,11 @@ int main(int argc, char** argv)
 	std::cout << "________________________________________\n";
 	set_terminal_color();
 	httplib::Server server;
+
 	// SCAN INDIVIDUAL FILE FOR YARA SIGNATURES
 	server.Post("/scan_file_for_yara", [](const httplib::Request& req, httplib::Response& res) {
 		bool is_file_present = req.has_param("file");
+		bool is_target_mentioned = req.has_param("target");
 		print_terminal_info();
 		std::cout << "REQUEST MADE TO SCAN FILE WITH YARA: ";
 		if (!is_file_present)
@@ -32,11 +35,19 @@ int main(int argc, char** argv)
 			std::cout << "[LOCATION NOT FOUND]\n";
 			set_terminal_color();
 		}
+		else if (!is_target_mentioned)
+		{
+			res.set_content(send_failure_response(), "application/json");
+			set_terminal_color(RED);
+			std::cout << "[TARGET NOT MENTIONED!]\n";
+			set_terminal_color();
+		}
 		else
 		{
-			yara_scanner scanner;
 			std::string file_location = req.get_param_value("file");
+			std::string target = req.get_param_value("target");
 			std::cout << file_location << "\n";
+			yara_scanner scanner(target);
 			std::vector<threat_info> detections = scanner.scan_file(file_location);
 			res.set_content(threat_info_vector_to_string(detections), "application/json");
 		}
@@ -62,7 +73,7 @@ int main(int argc, char** argv)
 	});
 
 	// ANAMOLY - SHANON ENTROPY
-	server.Post("/shanon_entropy_for_file", [](const httplib::Request& req, httplib::Response& res) {
+	server.Post("/shannon_entropy_for_file", [](const httplib::Request& req, httplib::Response& res) {
 		print_terminal_info();
 		set_terminal_color(CYAN);
 		std::cout << "REQUEST HAS BEEN MADE TO CALCULATE SHANNON ENTROPY.\n";
@@ -89,6 +100,13 @@ int main(int argc, char** argv)
 		{
 			res.set_content(send_failure_response(), "application/json");
 		}
+	});
+
+	// Check all yara signatures whether they can be compiled are not
+	server.Get("/check_yara", [](const httplib::Request& req, httplib::Response& res)
+	{
+		check_error_in_yara_signatures();
+		res.set_content(send_success_response(), "application/json");
 	});
 
 	// About Mrida Server
