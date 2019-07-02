@@ -36,3 +36,10 @@ std::string packer_vector_to_json(std::vector<std::string> packers)
 	detected_packers["detected"] = packers;
 	return detected_packers.dump();
 }
+
+std::string shannon_rntropy_to_json(double entropy_value)
+{
+	json entropy;
+	entropy["entropy"] = entropy_value;
+	return entropy.dump();
+}

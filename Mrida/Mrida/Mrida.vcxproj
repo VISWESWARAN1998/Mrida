@@ -125,6 +125,7 @@
     <ClCompile Include="mrida.cpp" />
     <ClCompile Include="packer_detector.cpp" />
     <ClCompile Include="response.cpp" />
+    <ClCompile Include="shannon_entropy.cpp" />
     <ClCompile Include="threat_info.cpp" />
     <ClCompile Include="yara_scanner.cpp" />
   </ItemGroup>
@@ -134,6 +135,7 @@
     <ClInclude Include="json.h" />
     <ClInclude Include="packer_detector.h" />
     <ClInclude Include="response.h" />
+    <ClInclude Include="shannon_entropy.h" />
     <ClInclude Include="threat_info.h" />
     <ClInclude Include="yara_scanner.h" />
   </ItemGroup>

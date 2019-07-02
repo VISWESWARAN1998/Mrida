@@ -3,12 +3,14 @@
 #include "httplib.h"
 #include <iostream>
 #include <vector>
+#include <experimental/filesystem>
 #include <yaracpp/yaracpp.h>
 #include "yara_scanner.h"
 #include "threat_info.h"
 #include "response.h"
 #include "display.h"
 #include "packer_detector.h"
+#include "shannon_entropy.h"
 
 int main(int argc, char** argv)
 {
@@ -52,6 +54,36 @@ int main(int argc, char** argv)
 			packer_detector detector;
 			std::vector<std::string> packer_list = detector.get_detected_packers(req.get_param_value("file"));
 			res.set_content(packer_vector_to_json(packer_list), "application/json");
+		}
+		else
+		{
+			res.set_content(send_failure_response(), "application/json");
+		}
+	});
+
+	// ANAMOLY - SHANON ENTROPY
+	server.Post("/shanon_entropy_for_file", [](const httplib::Request& req, httplib::Response& res) {
+		print_terminal_info();
+		set_terminal_color(CYAN);
+		std::cout << "REQUEST HAS BEEN MADE TO CALCULATE SHANNON ENTROPY.\n";
+		set_terminal_color();
+		bool is_param_present = req.has_param("file");
+		if (is_param_present)
+		{
+			std::string file_location = req.get_param_value("file");
+			if (std::experimental::filesystem::exists(file_location))
+			{
+				shannon_entropy entropy;
+				double entropy_value = entropy.shanon_entropy_for_file(file_location);
+				print_terminal_info();
+				std::cout << "SHANON ENTROPY OF FILE: " << entropy_value << "\n";
+				res.set_content(shannon_rntropy_to_json(entropy_value), "application/json");
+			}
+			else
+			{
+				print_terminal_info();
+				error_print("File Location does not exist!\n");
+			}
 		}
 		else
 		{

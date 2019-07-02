@@ -31,6 +31,9 @@
     <Filter Include="Source Files\http">
       <UniqueIdentifier>{1dc2bfb0-4529-48f9-ac4d-8337c64266b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\anomaly">
+      <UniqueIdentifier>{669cca5b-d619-4165-8289-f89fabf613bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mrida.cpp">
@@ -50,6 +53,9 @@
     </ClCompile>
     <ClCompile Include="packer_detector.cpp">
       <Filter>Source Files\yara_scanner</Filter>
+    </ClCompile>
+    <ClCompile Include="shannon_entropy.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -73,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="response.h">
       <Filter>Header Files\http</Filter>
+    </ClInclude>
+    <ClInclude Include="shannon_entropy.h">
+      <Filter>Header Files\anomaly</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
