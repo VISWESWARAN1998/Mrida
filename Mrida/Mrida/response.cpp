@@ -29,3 +29,10 @@ std::string threat_info_vector_to_string(std::vector<threat_info> vec)
 	threat_info_bucket["detections"] = detection_list;
 	return threat_info_bucket.dump();
 }
+
+std::string packer_vector_to_json(std::vector<std::string> packers)
+{
+	json detected_packers;
+	detected_packers["detected"] = packers;
+	return detected_packers.dump();
+}

@@ -3,11 +3,11 @@ An opensource antivirus implementation - Successor of CyberGod KSGMPRH
 
 Mrida is an open source antivirus implementation which uses YARA to detect malicious programs. It is programmed using C++ 14.
 
-# Requestiong to scan a threat:
+# Requesting to scan a file with YARA signatures:
 
 ```python
 import requests
-r = requests.post("http://127.0.0.1:5660/scan_file", data={"file": "D:/test.eicar"})
+r = requests.post("http://127.0.0.1:5660/scan_file_for_yara", data={"file": "D:/test.eicar"})
 r.json()
 ```
 
@@ -27,6 +27,23 @@ r.json()
     }
   ],
   "message": true
+}
+```
+
+# Getting List of packers:
+
+```python
+import requests
+r = requests.post("http://127.0.0.1:5660/scan_file_for_packer", data={"file": "D:/git-bash.exe"})
+r.json()
+```
+
+### OUTPUT:
+```json
+{
+  "detected": [
+    "Microsoft_Visual_Cpp_80_DLL"
+  ]
 }
 ```
 

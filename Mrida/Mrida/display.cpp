@@ -35,3 +35,17 @@ void set_terminal_color(unsigned short int color)
 	SetConsoleTextAttribute(consoleHandle, color);
 #endif // _WIN32
 }
+
+void error_print(std::string error_message)
+{
+	set_terminal_color(LIGHTRED);
+	std::cout << error_message;
+	set_terminal_color();
+}
+
+void success_print(std::string success_message)
+{
+	set_terminal_color(LIGHTGREEEN);
+	std::cout << success_message;
+	set_terminal_color();
+}

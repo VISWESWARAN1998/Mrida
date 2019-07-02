@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClCompile Include="display.cpp" />
     <ClCompile Include="mrida.cpp" />
+    <ClCompile Include="packer_detector.cpp" />
     <ClCompile Include="response.cpp" />
     <ClCompile Include="threat_info.cpp" />
     <ClCompile Include="yara_scanner.cpp" />
@@ -131,6 +132,7 @@
     <ClInclude Include="display.h" />
     <ClInclude Include="httplib.h" />
     <ClInclude Include="json.h" />
+    <ClInclude Include="packer_detector.h" />
     <ClInclude Include="response.h" />
     <ClInclude Include="threat_info.h" />
     <ClInclude Include="yara_scanner.h" />

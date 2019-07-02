@@ -48,6 +48,9 @@
     <ClCompile Include="response.cpp">
       <Filter>Source Files\http</Filter>
     </ClCompile>
+    <ClCompile Include="packer_detector.cpp">
+      <Filter>Source Files\yara_scanner</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="yara_scanner.h">
@@ -62,11 +65,14 @@
     <ClInclude Include="json.h">
       <Filter>Header Files\json</Filter>
     </ClInclude>
-    <ClInclude Include="response.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="display.h">
       <Filter>Header Files\cmd</Filter>
+    </ClInclude>
+    <ClInclude Include="packer_detector.h">
+      <Filter>Header Files\yara_scanner</Filter>
+    </ClInclude>
+    <ClInclude Include="response.h">
+      <Filter>Header Files\http</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
