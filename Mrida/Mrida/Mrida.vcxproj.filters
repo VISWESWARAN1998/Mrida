@@ -25,11 +25,11 @@
     <Filter Include="Header Files\json">
       <UniqueIdentifier>{c831cf2a-4360-4564-ad21-2f3ee0a42fc9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\json">
-      <UniqueIdentifier>{ebbe581d-10f2-4db7-9f2e-c56646779f44}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\cmd">
       <UniqueIdentifier>{1e61d91f-216e-4550-8702-183276eb20d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\http">
+      <UniqueIdentifier>{1dc2bfb0-4529-48f9-ac4d-8337c64266b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,11 +42,11 @@
     <ClCompile Include="threat_info.cpp">
       <Filter>Source Files\yara_scanner</Filter>
     </ClCompile>
-    <ClCompile Include="response.cpp">
-      <Filter>Source Files\json</Filter>
-    </ClCompile>
     <ClCompile Include="display.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="response.cpp">
+      <Filter>Source Files\http</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

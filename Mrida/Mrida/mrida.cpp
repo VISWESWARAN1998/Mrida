@@ -13,17 +13,23 @@ yara_scanner scanner;
 
 int main(int argc, char** argv)
 {
-	std::cout << "MRIDA AV CONSOLE\n________________________________________\n";
+	set_terminal_color();
+	std::cout << "MRIDA AV CONSOLE\n";
+	set_terminal_color(CYAN);
+	std::cout << "________________________________________\n";
+	set_terminal_color();
 	httplib::Server server;
 	// SCAN INDIVIDUAL FILE
-	server.Post("/scan_file", [](const httplib::Request& req, httplib::Response& res) {
+	server.Post("/scan_file_for_yara", [](const httplib::Request& req, httplib::Response& res) {
 		bool is_file_present = req.has_param("file");
 		print_terminal_info();
 		std::cout << "REQUEST MADE TO SCAN FILE: ";
 		if (!is_file_present)
 		{
 			res.set_content(send_failure_response(), "application/json");
+			set_terminal_color(RED);
 			std::cout << "[LOCATION NOT FOUND]\n";
+			set_terminal_color();
 		}
 		else
 		{
