@@ -7,7 +7,7 @@ Mrida is an open source antivirus implementation which uses YARA to detect malic
 
 ```python
 import requests
-r = requests.post("http://127.0.0.1:5660/scan_file_for_yara", data={"file": "D:/test.eicar"})
+r = requests.post("http://127.0.0.1:5660/scan_file_for_yara", data={"file": "D:/test.eicar", "target": "windows"})
 r.json()
 ```
 
@@ -44,6 +44,20 @@ r.json()
   "detected": [
     "Microsoft_Visual_Cpp_80_DLL"
   ]
+}
+```
+
+# Getting Shannon Entropy for file:
+
+```python
+r = requests.post("http://127.0.0.1:5660/shannon_entropy_for_file", data={"file": "D:/git-bash.exe"})
+r.json()
+```
+
+### OUTPUT:
+```json
+{
+  "entropy": 4.221405214084764
 }
 ```
 

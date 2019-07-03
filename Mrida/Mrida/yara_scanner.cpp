@@ -2,13 +2,16 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include <experimental/filesystem>
 #include "yara_scanner.h"
+#include "display.h"
 
 
 
 yara_scanner::yara_scanner(std::string target)
 {
+	display_contributors(target);
 	for (auto file : std::experimental::filesystem::recursive_directory_iterator("yara/"+target))
 	{
 		std::string yara_file = file.path().u8string();
@@ -47,4 +50,26 @@ std::vector<threat_info> yara_scanner::scan_file(std::string file_location)
 		}
 	}
 	return detected_signatures;
+}
+
+void yara_scanner::display_contributors(std::string target)
+{
+	if (!std::experimental::filesystem::exists("yara/" + target + ".txt")) return;
+	std::ifstream file;
+	file.open("yara/" + target + ".txt");
+	if (file.is_open())
+	{
+		while (!file.eof())
+		{
+			std::string line;
+			std::getline(file, line);
+			print_terminal_info();
+			set_terminal_color(CYAN);
+			std::cout << "USING RULES FROM: ";
+			set_terminal_color(YELLOW);
+			std::cout << line << "\n";
+			set_terminal_color();
+		}
+		file.close();
+	}
 }

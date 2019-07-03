@@ -12,6 +12,7 @@ class yara_scanner
 private:
 	yaracpp::YaraDetector yara;
 
+	void display_contributors(std::string target);
 public:
 	yara_scanner(std::string target);
 

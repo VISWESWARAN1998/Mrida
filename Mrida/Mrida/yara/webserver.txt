@@ -1,1 +1,2 @@
 https://github.com/Hestat/lw-yara  -- GPL 3.0
+https://github.com/Yara-Rules/rules -- GPL 2.0

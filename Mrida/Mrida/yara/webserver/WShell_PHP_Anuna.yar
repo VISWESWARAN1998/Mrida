@@ -2,9 +2,10 @@
     I first found this in May 2016, appeared in every PHP file on the
     server, cleaned it with `sed` and regex magic. Second time was
     in June 2016, same decoded content, different encoding/naming.
+
     https://www.symantec.com/security_response/writeup.jsp?docid=2015-111911-4342-99
 */
-rule php_anuna_eitest
+rule php_anuna
 {
     meta:
         author      = "Vlad https://github.com/vlad-s"
