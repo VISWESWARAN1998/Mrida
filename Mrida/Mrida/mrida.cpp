@@ -12,6 +12,7 @@
 #include "packer_detector.h"
 #include "shannon_entropy.h"
 #include "yara_error_checker.h"
+#include "web_blocker.h"
 
 int main(int argc, char** argv)
 {
@@ -109,14 +110,36 @@ int main(int argc, char** argv)
 		res.set_content(send_success_response(), "application/json");
 	});
 
-	// About Mrida Server
-	server.Get("/about", [](const httplib::Request& req, httplib::Response& res) {
+	// Check whether a domain is blocked or not
+	server.Get("/is_domain_blocked", [](const httplib::Request& req, httplib::Response& res)
+	{
+		bool is_param_present = req.has_param("host");
+		if (is_param_present)
+		{
+			print_terminal_info();
+			set_terminal_color(YELLOW);
+			std::string domain = req.get_param_value("host");
+			std::cout << "CHECKING DOMAIN FOR BLACKLISTS: ";
+			set_terminal_color(CYAN);
+			std::cout << domain << "\n";
+			set_terminal_color();
+			web_blocker domain_blocker;
+			bool blocked = domain_blocker.is_domain_blocked(domain);
+			res.set_header("Content-Type", "application/json");
+			res.set_header("X-Content-Type-Options", "nosniff");
+			res.set_header("Access-Control-Allow-Origin", "*");
+			res.set_content(is_domain_blocked_json(blocked), "application/json");
+		}
+	});
+
+	// Display blocked page
+	server.Get("/blocked", [](const httplib::Request& req, httplib::Response& res) {
 		print_terminal_info();
 		set_terminal_color(LIGHTGREEEN);
-		std::cout << "Serving about.html\n";
+		std::cout << "Serving blocked.html\n";
 		set_terminal_color();
 		std::string out;
-		httplib::detail::read_file("templates/about.html", out);
+		httplib::detail::read_file("templates/blocked.html", out);
 		res.set_content(out, "text/html");
 	});
 

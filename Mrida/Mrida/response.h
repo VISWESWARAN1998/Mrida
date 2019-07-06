@@ -23,3 +23,6 @@ std::string packer_vector_to_json(std::vector<std::string> packers);
 // Shanon Entropy
 std::string shannon_rntropy_to_json(double entropy_value);
 
+// Is Domain Blocked to JSON
+std::string is_domain_blocked_json(bool blocked_status);
+

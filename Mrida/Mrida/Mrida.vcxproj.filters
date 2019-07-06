@@ -37,6 +37,15 @@
     <Filter Include="Source Files\yara">
       <UniqueIdentifier>{3ce16aa1-7709-4a6c-ab9f-c10de3496a62}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\web">
+      <UniqueIdentifier>{4c8ba7cf-0169-4cf7-8d86-e182b40c7b7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\anomaly">
+      <UniqueIdentifier>{f1d702d2-af10-48fc-b606-7326a929e3f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\web">
+      <UniqueIdentifier>{08bd56b5-fb70-41e3-942a-205d293967e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mrida.cpp">
@@ -54,14 +63,17 @@
     <ClCompile Include="packer_detector.cpp">
       <Filter>Source Files\yara</Filter>
     </ClCompile>
-    <ClCompile Include="shannon_entropy.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="display.cpp">
       <Filter>Source Files\cmd</Filter>
     </ClCompile>
     <ClCompile Include="yara_error_checker.cpp">
       <Filter>Source Files\yara</Filter>
+    </ClCompile>
+    <ClCompile Include="shannon_entropy.cpp">
+      <Filter>Source Files\anomaly</Filter>
+    </ClCompile>
+    <ClCompile Include="web_blocker.cpp">
+      <Filter>Source Files\web</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="yara_error_checker.h">
       <Filter>Header Files\yara</Filter>
+    </ClInclude>
+    <ClInclude Include="web_blocker.h">
+      <Filter>Header Files\web</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

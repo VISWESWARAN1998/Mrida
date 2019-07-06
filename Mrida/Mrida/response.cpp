@@ -50,3 +50,10 @@ std::string shannon_rntropy_to_json(double entropy_value)
 	entropy["entropy"] = entropy_value;
 	return entropy.dump();
 }
+
+std::string is_domain_blocked_json(bool blocked_status)
+{
+	json blocked;
+	blocked["message"] = blocked_status;
+	return blocked.dump();
+}

@@ -1,0 +1,18 @@
+{
+  "manifest_version": 2,
+  "name": "Mrida Domain Blocker",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "mrida_blocker.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>"
+  ]
+}
