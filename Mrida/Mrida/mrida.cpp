@@ -14,6 +14,7 @@
 #include "yara_error_checker.h"
 #include "web_blocker.h"
 
+
 int main(int argc, char** argv)
 {
 	set_terminal_color();
@@ -141,6 +142,19 @@ int main(int argc, char** argv)
 		std::string out;
 		httplib::detail::read_file("templates/blocked.html", out);
 		res.set_content(out, "text/html");
+	});
+
+	// Block a domain
+	server.Post("/block_domain", [](const httplib::Request& req, httplib::Response& res) {
+		print_terminal_info();
+		bool is_param_present = req.has_param("host");
+		if (is_param_present)
+		{
+			std::string domain = req.get_param_value("host");
+			web_blocker block;
+			block.add_domain_to_blocked(domain);
+			res.set_content(send_success_response(), "application/json");
+		}
 	});
 
 	print_terminal_info();

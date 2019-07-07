@@ -5,6 +5,7 @@
 #include <fstream>
 #include <mutex>
 #include <set>
+#include "sqlite_modern_cpp.h"
 
 
 class web_blocker

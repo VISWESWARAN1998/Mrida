@@ -46,6 +46,12 @@
     <Filter Include="Source Files\web">
       <UniqueIdentifier>{08bd56b5-fb70-41e3-942a-205d293967e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="sqlite">
+      <UniqueIdentifier>{1476b77a-d946-4eb0-8c36-7bc071e21628}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\sqlite">
+      <UniqueIdentifier>{59506733-aef5-4d67-871f-770cf33e5775}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mrida.cpp">
@@ -74,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="web_blocker.cpp">
       <Filter>Source Files\web</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite3.c">
+      <Filter>Source Files\sqlite</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +115,9 @@
     </ClInclude>
     <ClInclude Include="web_blocker.h">
       <Filter>Header Files\web</Filter>
+    </ClInclude>
+    <ClInclude Include="sqlite3.h">
+      <Filter>sqlite</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

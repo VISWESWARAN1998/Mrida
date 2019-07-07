@@ -61,6 +61,18 @@ r.json()
 }
 ```
 
+# Check whether a domain is blocked or not
+```
+http://127.0.0.1:5660/is_domain_blocked?host=www.test.com
+```
+
+### OUTPUT:
+```json
+{
+  "message": false
+}
+```
+
 The antivirus makes use of the following opensource libraries:
 
 1. [YARA by VirusTotal](https://github.com/VirusTotal/yara)

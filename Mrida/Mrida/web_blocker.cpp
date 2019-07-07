@@ -3,26 +3,12 @@
 #include <experimental/filesystem>
 #include "web_blocker.h"
 #include "display.h"
-
+#include "sqlite3.h"
 
 
 web_blocker::web_blocker()
 {
-	if (std::experimental::filesystem::exists("blocked.txt"))
-	{
-		std::ifstream file;
-		file.open("blocked.txt");
-		if (file.is_open())
-		{
-			while (!file.eof())
-			{
-				std::string domain;
-				std::getline(file, domain);
-				block_list.insert(domain);
-			}
-			file.close();
-		}
-	}
+		
 }
 
 
@@ -32,20 +18,20 @@ web_blocker::~web_blocker()
 
 void web_blocker::add_domain_to_blocked(std::string domain_name)
 {
-	//write_mutex.lock();
-	std::ofstream file;
-	file.open("blocked.txt", std::ios::app);
-	if (file.is_open())
+	if (!is_domain_blocked(domain_name))
 	{
-		file << domain_name << "\n";
-		file.close();
+		sqlite::database database("web_blocker.db");
+		database << "insert into block_list(domain_name) values(?);" << domain_name;
 	}
-	//write_mutex.unlock();
 }
 
 bool web_blocker::is_domain_blocked(std::string domain_name)
 {
-	if (block_list.find(domain_name) != block_list.end()) 
+	sqlite::database database("web_blocker.db");
+	database << "create table if not exists block_list(domain_name text primary key);";
+	int count = 0;
+	database << "select count(domain_name) from block_list where domain_name=?" << domain_name >> count;
+	if (count > 0)
 	{
 		error_print(domain_name + " IS IN BLACKLIST\n");
 		return true;
