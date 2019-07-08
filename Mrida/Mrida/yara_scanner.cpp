@@ -11,12 +11,14 @@
 
 yara_scanner::yara_scanner(std::string target)
 {
-	display_contributors(target);
-	for (auto file : std::experimental::filesystem::recursive_directory_iterator("yara/"+target))
+	if (target == "all")
 	{
-		std::string yara_file = file.path().u8string();
-		this->yara.addRuleFile(yara_file);
+		load_yara_files_from_folder("windows");
+		load_yara_files_from_folder("linux");
+		load_yara_files_from_folder("mac");
+		load_yara_files_from_folder("webserver");
 	}
+	else load_yara_files_from_folder(target);
 }
 
 std::vector<threat_info> yara_scanner::scan_file(std::string file_location)
@@ -71,5 +73,15 @@ void yara_scanner::display_contributors(std::string target)
 			set_terminal_color();
 		}
 		file.close();
+	}
+}
+
+void yara_scanner::load_yara_files_from_folder(std::string folder_name)
+{
+	display_contributors(folder_name);
+	for (auto file : std::experimental::filesystem::recursive_directory_iterator("yara/" + folder_name))
+	{
+		std::string yara_file = file.path().u8string();
+		this->yara.addRuleFile(yara_file);
 	}
 }

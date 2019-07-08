@@ -84,6 +84,9 @@
     <ClCompile Include="sqlite3.c">
       <Filter>Source Files\sqlite</Filter>
     </ClCompile>
+    <ClCompile Include="..\tlsh\WinFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="yara_scanner.h">
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="sqlite3.h">
       <Filter>sqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlsh\WinFunctions.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
