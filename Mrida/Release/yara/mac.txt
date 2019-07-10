@@ -1,1 +1,0 @@
-https://github.com/airbnb/binaryalert/ --> Apache 2.0

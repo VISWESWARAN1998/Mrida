@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IncludePath>$(IncludePath)</IncludePath>
-    <LibraryPath>D:\yaracpp-master\build\src\Release;D:\yaracpp-master\build\deps\yara\src\yara\windows\vs2017\libyara\Release;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\Mrida\Mrida\tlsh\linker;D:\yaracpp-master\build\src\Release;D:\yaracpp-master\build\deps\yara\src\yara\windows\vs2017\libyara\Release;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,15 +98,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\tlsh;D:\yaracpp-master\include;D:\yaracpp-master\build\deps\yara\src\yara\libyara\include;D:\sqlite_modern_cpp-master\hdr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Mrida\Mrida\tlsh\includes;D:\yaracpp-master\include;D:\yaracpp-master\build\deps\yara\src\yara\libyara\include;D:\sqlite_modern_cpp-master\hdr;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <PreprocessorDefinitions>WINDOWS;SQLITE_ENABLE_COLUMN_METADATA;SQLITE_ENABLE_RTREE;SQLITE3_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libyara32.lib;yaracpp.lib;Ws2_32.lib;crypt32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\tlsh;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libyara32.lib;yaracpp.lib;Ws2_32.lib;crypt32.lib;tlsh.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Mrida\Mrida\tlsh\linker</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -124,7 +124,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\tlsh\WinFunctions.cpp" />
     <ClCompile Include="display.cpp" />
     <ClCompile Include="mrida.cpp" />
     <ClCompile Include="packer_detector.cpp" />
@@ -132,12 +131,13 @@
     <ClCompile Include="shannon_entropy.cpp" />
     <ClCompile Include="sqlite3.c" />
     <ClCompile Include="threat_info.cpp" />
+    <ClCompile Include="trendcpp.cpp" />
     <ClCompile Include="web_blocker.cpp" />
+    <ClCompile Include="WinFunctions.cpp" />
     <ClCompile Include="yara_error_checker.cpp" />
     <ClCompile Include="yara_scanner.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\tlsh\WinFunctions.h" />
     <ClInclude Include="display.h" />
     <ClInclude Include="httplib.h" />
     <ClInclude Include="json.h" />
@@ -146,6 +146,7 @@
     <ClInclude Include="shannon_entropy.h" />
     <ClInclude Include="sqlite3.h" />
     <ClInclude Include="threat_info.h" />
+    <ClInclude Include="trendcpp.h" />
     <ClInclude Include="web_blocker.h" />
     <ClInclude Include="yara_error_checker.h" />
     <ClInclude Include="yara_scanner.h" />

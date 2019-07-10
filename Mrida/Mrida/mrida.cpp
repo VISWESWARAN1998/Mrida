@@ -13,6 +13,7 @@
 #include "shannon_entropy.h"
 #include "yara_error_checker.h"
 #include "web_blocker.h"
+#include "trendcpp.h"
 
 
 int main(int argc, char** argv)

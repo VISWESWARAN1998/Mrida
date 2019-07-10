@@ -52,6 +52,12 @@
     <Filter Include="Source Files\sqlite">
       <UniqueIdentifier>{59506733-aef5-4d67-871f-770cf33e5775}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\trend">
+      <UniqueIdentifier>{cec93d68-8361-4bd2-aa25-5cb62a0434b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\trend">
+      <UniqueIdentifier>{ec5f34d7-a25e-404e-8ff0-6e41873b00c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mrida.cpp">
@@ -84,8 +90,11 @@
     <ClCompile Include="sqlite3.c">
       <Filter>Source Files\sqlite</Filter>
     </ClCompile>
-    <ClCompile Include="..\tlsh\WinFunctions.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="WinFunctions.cpp">
+      <Filter>Source Files\trend</Filter>
+    </ClCompile>
+    <ClCompile Include="trendcpp.cpp">
+      <Filter>Source Files\trend</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,8 +131,8 @@
     <ClInclude Include="sqlite3.h">
       <Filter>sqlite</Filter>
     </ClInclude>
-    <ClInclude Include="..\tlsh\WinFunctions.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="trendcpp.h">
+      <Filter>Header Files\trend</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
