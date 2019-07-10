@@ -5,6 +5,8 @@
  */
 package mrida_gui;
 
+import api.ScanDir;
+import api.ScanFile;
 import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -66,6 +68,14 @@ public class Mrida extends javax.swing.JFrame {
         fileScanningLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         scanFilePath = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        scanFileTable = new javax.swing.JTable();
+        ScanFolderPanel = new javax.swing.JPanel();
+        folderScanningLabel = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        scanFolderPath = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        scanFolderTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -300,6 +310,9 @@ public class Mrida extends javax.swing.JFrame {
         customScanIcon.setText("CUSTOM SCAN");
         customScanIcon.setOpaque(true);
         customScanIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customScanIconMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 customScanIconMouseEntered(evt);
             }
@@ -443,6 +456,16 @@ public class Mrida extends javax.swing.JFrame {
 
         jLabel7.setText("Path:");
 
+        scanFileTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "File Location", "Threat Name", "Signature Author", "Threat Description"
+            }
+        ));
+        jScrollPane1.setViewportView(scanFileTable);
+
         javax.swing.GroupLayout ScanFilePanelLayout = new javax.swing.GroupLayout(ScanFilePanel);
         ScanFilePanel.setLayout(ScanFilePanelLayout);
         ScanFilePanelLayout.setHorizontalGroup(
@@ -450,10 +473,14 @@ public class Mrida extends javax.swing.JFrame {
             .addComponent(fileScanningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ScanFilePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(scanFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addGroup(ScanFilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(ScanFilePanelLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(scanFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 206, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         ScanFilePanelLayout.setVerticalGroup(
             ScanFilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -463,10 +490,63 @@ public class Mrida extends javax.swing.JFrame {
                 .addGroup(ScanFilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(scanFilePath))
-                .addGap(0, 498, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         mainPanel.add(ScanFilePanel, "card2");
+
+        ScanFolderPanel.setBackground(new java.awt.Color(255, 255, 255));
+
+        folderScanningLabel.setBackground(new java.awt.Color(0, 102, 153));
+        folderScanningLabel.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        folderScanningLabel.setForeground(new java.awt.Color(0, 102, 153));
+        folderScanningLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/icons8-hunt-96.png"))); // NOI18N
+        folderScanningLabel.setText("SCANNING FOLDER");
+
+        jLabel8.setText("Path:");
+
+        scanFolderTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "File Location", "Threat Name", "Signature Author", "Threat Description"
+            }
+        ));
+        jScrollPane2.setViewportView(scanFolderTable);
+
+        javax.swing.GroupLayout ScanFolderPanelLayout = new javax.swing.GroupLayout(ScanFolderPanel);
+        ScanFolderPanel.setLayout(ScanFolderPanelLayout);
+        ScanFolderPanelLayout.setHorizontalGroup(
+            ScanFolderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(folderScanningLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(ScanFolderPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(ScanFolderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2)
+                    .addGroup(ScanFolderPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(scanFolderPath, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 206, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        ScanFolderPanelLayout.setVerticalGroup(
+            ScanFolderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ScanFolderPanelLayout.createSequentialGroup()
+                .addComponent(folderScanningLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(ScanFolderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(scanFolderPath))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        mainPanel.add(ScanFolderPanel, "card2");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -474,14 +554,13 @@ public class Mrida extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -578,7 +657,25 @@ public class Mrida extends javax.swing.JFrame {
         mainPanel.revalidate();
         mainPanel.add(ScanFilePanel);
         scanFilePath.setText(fileString);
+        scanFileTable.removeAll();
+        new ScanFile(fileString, scanFileTable).start();
     }//GEN-LAST:event_scanFileIconMouseClicked
+
+    private void customScanIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customScanIconMouseClicked
+        // TODO add your handling code here:
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Choose Directory To Scan");
+        chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        int result = chooser.showOpenDialog(this);
+        if(result == JFileChooser.APPROVE_OPTION)
+        {
+            mainPanel.removeAll();
+            mainPanel.repaint();
+            mainPanel.revalidate();
+            mainPanel.add(ScanFolderPanel);
+            new ScanDir(chooser.getSelectedFile().toString(), scanFolderPath, scanFolderTable).start();
+        }
+    }//GEN-LAST:event_customScanIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -623,12 +720,14 @@ public class Mrida extends javax.swing.JFrame {
     private javax.swing.JPanel HomePanel;
     private javax.swing.JLabel India;
     private javax.swing.JPanel ScanFilePanel;
+    private javax.swing.JPanel ScanFolderPanel;
     private javax.swing.JPanel ScanPanel;
     private javax.swing.JPanel SettingPanel;
     private javax.swing.JPanel UpdatePanel;
     private javax.swing.JLabel aboutLabel;
     private javax.swing.JLabel customScanIcon;
     private javax.swing.JLabel fileScanningLabel;
+    private javax.swing.JLabel folderScanningLabel;
     private javax.swing.JLabel fullScanIcon;
     private javax.swing.JPanel fullScanPanel;
     private javax.swing.JLabel homeLabel;
@@ -638,6 +737,7 @@ public class Mrida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -648,10 +748,15 @@ public class Mrida extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JLabel quickScanIcon;
     private javax.swing.JLabel scanFileIcon;
     private javax.swing.JLabel scanFilePath;
+    private javax.swing.JTable scanFileTable;
+    private javax.swing.JLabel scanFolderPath;
+    private javax.swing.JTable scanFolderTable;
     private javax.swing.JLabel scanLabel;
     // End of variables declaration//GEN-END:variables
 }
