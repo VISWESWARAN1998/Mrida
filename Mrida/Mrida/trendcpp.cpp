@@ -4,6 +4,7 @@
 
 #include "trendcpp.h"
 #include <experimental/filesystem>
+#include <sqlite_modern_cpp.h>
 
 
 
@@ -157,4 +158,18 @@ const Tlsh * trendcpp::hash_file(std::string file_location)
 		return nullptr;
 	}
 	return &th;
+}
+
+void trendcpp::add_threat_to_database(unsigned long int id, std::string tlsh_hash, std::string threat_name, unsigned long file_size, unsigned int file_type, unsigned int target_os)
+{
+	try {
+		sqlite::database threat_database("threat_db.sqlite3");
+		threat_database << "create table if not exists threat(id unsigned bigint primary key, threat_hash text, threat_name text, threat_size unsigned int, threat_type unsigned int, target_os unsigned tinyint);";
+		threat_database << "insert into threat(id, threat_hash, threat_name, threat_size, threat_type, target_os) values(?, ?, ?, ?, ?, ?)" << id << tlsh_hash << threat_name << file_size << file_type << target_os;
+		threat_database << "SELECT * FROM threat WHERE editdist3(threat_hash, \"a\") < 600";
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what();
+	}
 }

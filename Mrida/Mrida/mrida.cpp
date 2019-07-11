@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <experimental/filesystem>
+#include <thread>
 #include <yaracpp/yaracpp.h>
 #include "yara_scanner.h"
 #include "threat_info.h"
@@ -155,6 +156,27 @@ int main(int argc, char** argv)
 			web_blocker block;
 			block.add_domain_to_blocked(domain);
 			res.set_content(send_success_response(), "application/json");
+		}
+	});
+
+	// Scan all the process for virustotal
+	server.Post("/proc_scan", [](const httplib::Request& req, httplib::Response& res) {
+		bool is_api_key_present = req.has_param("api");
+		bool is_type_present = req.has_param("type");
+		if (is_api_key_present && is_type_present)
+		{
+			std::string api_key = req.get_param_value("api");
+			std::string type = req.get_param_value("type");
+			if (type == "gui")
+			{
+				res.set_content(send_success_response(), "application/json");
+				std::string command = "procscan.exe " + type + " " + api_key;
+				print_terminal_info();
+				set_terminal_color(LIGHTGREEEN);
+				std::cout << "PERFORMING VIRUSTOTAL SCAN ON RUNNING PROCESSES\n";
+				set_terminal_color();
+				system(command.c_str());
+			}
 		}
 	});
 

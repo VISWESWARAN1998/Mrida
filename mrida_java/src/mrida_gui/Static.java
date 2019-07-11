@@ -11,5 +11,5 @@ package mrida_gui;
  * @author Visweswaran
  */
 public class Static {
-    public static String fileToScan = "";
+    public static boolean dirScanning = false;
 }

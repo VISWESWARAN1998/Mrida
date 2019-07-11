@@ -663,6 +663,14 @@ public class Mrida extends javax.swing.JFrame {
 
     private void customScanIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customScanIconMouseClicked
         // TODO add your handling code here:
+        if(Static.dirScanning)
+        {
+            mainPanel.removeAll();
+            mainPanel.repaint();
+            mainPanel.revalidate();
+            mainPanel.add(ScanFolderPanel);
+            return;
+        }
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Choose Directory To Scan");
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

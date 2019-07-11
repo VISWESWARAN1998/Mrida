@@ -46,9 +46,6 @@
     <Filter Include="Source Files\web">
       <UniqueIdentifier>{08bd56b5-fb70-41e3-942a-205d293967e7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="sqlite">
-      <UniqueIdentifier>{1476b77a-d946-4eb0-8c36-7bc071e21628}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\sqlite">
       <UniqueIdentifier>{59506733-aef5-4d67-871f-770cf33e5775}</UniqueIdentifier>
     </Filter>
@@ -57,6 +54,9 @@
     </Filter>
     <Filter Include="Source Files\trend">
       <UniqueIdentifier>{ec5f34d7-a25e-404e-8ff0-6e41873b00c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\sqlite">
+      <UniqueIdentifier>{1476b77a-d946-4eb0-8c36-7bc071e21628}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,7 +129,7 @@
       <Filter>Header Files\web</Filter>
     </ClInclude>
     <ClInclude Include="sqlite3.h">
-      <Filter>sqlite</Filter>
+      <Filter>Header Files\sqlite</Filter>
     </ClInclude>
     <ClInclude Include="trendcpp.h">
       <Filter>Header Files\trend</Filter>

@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import mrida_gui.Static;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -36,12 +37,13 @@ public class ScanDir extends Thread{
         this.folderLocation = folderLocation;
         this.label = label;
         this.table = table;
-        this.table.removeAll();
         this.model = (DefaultTableModel) this.table.getModel();
     }
     
     public void run()
     {
+        Static.dirScanning = true;
+        this.model.setNumRows(0);
         try {
             Files.walk(Paths.get(folderLocation))
                     .filter(Files::isRegularFile)
@@ -49,6 +51,7 @@ public class ScanDir extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(ScanDir.class.getName()).log(Level.SEVERE, null, ex);
         }
+        Static.dirScanning = false;
     }
     
     public void scan(Path fileLocation)
@@ -66,6 +69,7 @@ public class ScanDir extends Thread{
                 {
                     JSONObject detection = (JSONObject) o;
                     model.addRow(new Object[]{fileLocation.toString(), detection.get("name"), detection.get("author"), detection.get("description")});
+                    this.table.changeSelection(this.table.getRowCount()-1, 0, false, false);
                 }
             }
         } catch (IOException ex) {

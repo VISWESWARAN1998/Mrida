@@ -73,6 +73,11 @@ http://127.0.0.1:5660/is_domain_blocked?host=www.test.com
 }
 ```
 
+# Perform virustotal scan on all running process:
+```python
+r = requests.post("http://127.0.0.1:5660/proc_scan", data={"type": "gui", "api": "[YOUR KEY]"})
+```
+
 The antivirus makes use of the following opensource libraries:
 
 1. [YARA by VirusTotal](https://github.com/VirusTotal/yara)
