@@ -29,3 +29,5 @@ std::string is_domain_blocked_json(bool blocked_status);
 // Sending TLSH hash JSON
 std::string tlsh_hash_to_json(std::string tlsh_hash);
 
+// TLSH hash distance
+std::string tlsh_hash_distance_to_json(int distance);

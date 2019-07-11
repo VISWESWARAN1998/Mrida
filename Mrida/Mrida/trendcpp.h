@@ -18,5 +18,8 @@ public:
 
 	// Bool add threat to database
 	void add_threat_to_database(unsigned long int id, std::string tlsh_hash, std::string threat_name, unsigned long file_size, unsigned int file_type, unsigned int target_os);
+
+	// Getting the similarity distance
+	int similarity_distance(std::string hash_one, std::string hash_two);
 };
 

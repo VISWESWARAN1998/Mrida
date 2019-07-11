@@ -78,6 +78,19 @@ http://127.0.0.1:5660/is_domain_blocked?host=www.test.com
 r = requests.post("http://127.0.0.1:5660/proc_scan", data={"type": "gui", "api": "[YOUR KEY]"})
 ```
 
+# Getting the tlsh similarity distance for two hashes
+```
+r = requests.get("http://127.0.0.1:5660/get_tlsh_distance?hash_one=B0648D22F7D290B5D063033049BCA2BAA67FFDBFD920825BB3C4631E4DB0791AE35F56&hash_two=B0648D22F7D290B5D063033049BCA2BAA67FFDB55920825BB3C4631E4DB0791AE35F56")
+r.json()
+```
+
+### OUTPUT:
+```json
+{
+  "message": 6
+}
+```
+
 The antivirus makes use of the following opensource libraries:
 
 1. [YARA by VirusTotal](https://github.com/VirusTotal/yara)

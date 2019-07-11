@@ -64,3 +64,10 @@ std::string tlsh_hash_to_json(std::string tlsh_hash)
 	tlsh["message"] = tlsh_hash;
 	return tlsh.dump();
 }
+
+std::string tlsh_hash_distance_to_json(int distance)
+{
+	json tlsh;
+	tlsh["message"] = distance;
+	return tlsh.dump();
+}

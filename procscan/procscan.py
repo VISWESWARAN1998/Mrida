@@ -5,6 +5,7 @@ import time
 import json
 import hashlib
 import requests
+import pickle
 import psutil
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QTableWidget, QTableWidgetItem
 from PyQt5.QtCore import QThread, pyqtSignal, pyqtSlot
@@ -29,6 +30,22 @@ class VTScanProcess:
 
     def scan(self):
         self.get_process_list()
+        with open("whitelist.pkl", "rb") as pkl:
+            pure_hashes = pickle.load(pkl)
+        for i, process in enumerate(self.process_list):
+            process_path = process["exe"]
+            r = requests.post("http://127.0.0.1:5660/get_tlsh", data={"file": process_path})
+            tlsh_hash = r.json()["message"]
+            if len(tlsh_hash) > 0:
+                for _hash in pure_hashes:
+                    r = requests.get("http://127.0.0.1:5660/get_tlsh_distance?"
+                                     "hash_one={}&hash_two={}".format(tlsh_hash, _hash))
+                    result = r.json()["message"]
+                    if result != -1:
+                        if result < 20:
+                            del self.process_list[i]
+                            print("PROCSCAN ", process_path, " IS IN WHITELIST")
+
         for process in self.process_list:
             process_path = process["exe"]
             if process_path not in self.scanned_list:
@@ -111,7 +128,6 @@ class VTScanProcessGUI(QWidget):
 if __name__ == "__main__":
     contents = sys.argv
     if len(contents) < 3:
-        print("procscan missing args")
         sys.exit(-1)
     api_key = contents[2]
     if contents[1] == "gui":

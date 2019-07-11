@@ -173,3 +173,15 @@ void trendcpp::add_threat_to_database(unsigned long int id, std::string tlsh_has
 		std::cout << e.what();
 	}
 }
+
+int trendcpp::similarity_distance(std::string hash_one, std::string hash_two)
+{
+	Tlsh t1;
+	Tlsh t2;
+	int err1;
+	int err2;
+	err1 = t1.fromTlshStr(hash_one.c_str());
+	err2 = t2.fromTlshStr(hash_two.c_str());
+	if (err1 || err2) return -1;
+	return t1.totalDiff(&t2);
+}

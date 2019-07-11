@@ -159,7 +159,7 @@ int main(int argc, char** argv)
 		}
 	});
 
-	/* Scan all the process for virustotal
+	// Scan all the process for virustotal
 	server.Post("/proc_scan", [](const httplib::Request& req, httplib::Response& res) {
 		bool is_api_key_present = req.has_param("api");
 		bool is_type_present = req.has_param("type");
@@ -178,7 +178,7 @@ int main(int argc, char** argv)
 				system(command.c_str());
 			}
 		}
-	});*/
+	});
 
 	// Getting the TLSH hash for the file
 	server.Post("/get_tlsh", [](const httplib::Request& req, httplib::Response& res) {
@@ -192,6 +192,20 @@ int main(int argc, char** argv)
 			std::cout << "GETTING HASH FOR" << req.get_param_value("file") << "\n";
 			set_terminal_color();
 			res.set_content(tlsh_hash_to_json(hash), "application/json");
+		}
+	});
+
+	// Check the similarity distance for TWO TLSH hashes
+	server.Get("/get_tlsh_distance", [](const httplib::Request& req, httplib::Response& res) {
+		bool is_hash_one_present = req.has_param("hash_one");
+		bool is_hash_two_present = req.has_param("hash_two");
+		print_terminal_info();
+		std::cout << "REQUESTED TO GET SIMILARITY DISTANCE\n";
+		if (is_hash_one_present && is_hash_two_present)
+		{
+			trendcpp tlsh;
+			int similarity_distance = tlsh.similarity_distance(req.get_param_value("hash_one"), req.get_param_value("hash_two"));
+			res.set_content(tlsh_hash_distance_to_json(similarity_distance), "application/json");
 		}
 	});
 
