@@ -26,3 +26,6 @@ std::string shannon_rntropy_to_json(double entropy_value);
 // Is Domain Blocked to JSON
 std::string is_domain_blocked_json(bool blocked_status);
 
+// Sending TLSH hash JSON
+std::string tlsh_hash_to_json(std::string tlsh_hash);
+

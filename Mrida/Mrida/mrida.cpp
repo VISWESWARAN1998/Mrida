@@ -159,7 +159,7 @@ int main(int argc, char** argv)
 		}
 	});
 
-	// Scan all the process for virustotal
+	/* Scan all the process for virustotal
 	server.Post("/proc_scan", [](const httplib::Request& req, httplib::Response& res) {
 		bool is_api_key_present = req.has_param("api");
 		bool is_type_present = req.has_param("type");
@@ -177,6 +177,21 @@ int main(int argc, char** argv)
 				set_terminal_color();
 				system(command.c_str());
 			}
+		}
+	});*/
+
+	// Getting the TLSH hash for the file
+	server.Post("/get_tlsh", [](const httplib::Request& req, httplib::Response& res) {
+		bool is_file_present = req.has_param("file");
+		if (is_file_present)
+		{
+			trendcpp tlsh;
+			std::string hash = tlsh.hash_file_to_string(req.get_param_value("file"));
+			print_terminal_info();
+			set_terminal_color(CYAN);
+			std::cout << "GETTING HASH FOR" << req.get_param_value("file") << "\n";
+			set_terminal_color();
+			res.set_content(tlsh_hash_to_json(hash), "application/json");
 		}
 	});
 

@@ -57,3 +57,10 @@ std::string is_domain_blocked_json(bool blocked_status)
 	blocked["message"] = blocked_status;
 	return blocked.dump();
 }
+
+std::string tlsh_hash_to_json(std::string tlsh_hash)
+{
+	json tlsh;
+	tlsh["message"] = tlsh_hash;
+	return tlsh.dump();
+}
