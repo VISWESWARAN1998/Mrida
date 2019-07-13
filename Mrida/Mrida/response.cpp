@@ -71,3 +71,10 @@ std::string tlsh_hash_distance_to_json(int distance)
 	tlsh["message"] = distance;
 	return tlsh.dump();
 }
+
+std::string return_json(long value)
+{
+	json j;
+	j["message"] = value;
+	return j.dump();
+}

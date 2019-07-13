@@ -49,20 +49,23 @@ class VTScanProcess:
         for process in self.process_list:
             process_path = process["exe"]
             if process_path not in self.scanned_list:
-                md5_hash = self.calculate_md5(process_path)
-                url = 'https://www.virustotal.com/vtapi/v2/file/report'
-                params = {'apikey': self.api_key, 'resource': md5_hash}
-                response = requests.get(url, params=params)
-                positives = response.json()["positives"]
-                total = response.json()["total"]
-                if self.scan_id:
-                    print("SCANNED PID: ", process["pid"])
-                    self.report.append([process["pid"], process["name"], process["exe"], positives, total])
-                else:
-                    self.signal.emit({"name": process["name"], "exe": process["exe"], "positives": positives,
-                                      "total": total})
-                self.scanned_list.append(process_path)
-                time.sleep(25)
+                try:
+                    md5_hash = self.calculate_md5(process_path)
+                    url = 'https://www.virustotal.com/vtapi/v2/file/report'
+                    params = {'apikey': self.api_key, 'resource': md5_hash}
+                    response = requests.get(url, params=params)
+                    positives = response.json()["positives"]
+                    total = response.json()["total"]
+                    if self.scan_id:
+                        print("SCANNED PID: ", process["pid"])
+                        self.report.append([process["pid"], process["name"], process["exe"], positives, total])
+                    else:
+                        self.signal.emit({"name": process["name"], "exe": process["exe"], "positives": positives,
+                                          "total": total})
+                    self.scanned_list.append(process_path)
+                    time.sleep(25)
+                except Exception as e:
+                    print(e)
 
         if self.scan_id:
             with open("report" + self.scan_id + ".json", "w") as file:

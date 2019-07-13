@@ -31,3 +31,6 @@ std::string tlsh_hash_to_json(std::string tlsh_hash);
 
 // TLSH hash distance
 std::string tlsh_hash_distance_to_json(int distance);
+
+// Return custom value
+std::string return_json(long value);

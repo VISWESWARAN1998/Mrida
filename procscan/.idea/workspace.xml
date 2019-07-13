@@ -14,7 +14,7 @@
       <file leaf-file-name="procscan.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/procscan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1054">
+            <state relative-caret-position="17">
               <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
               <folding>
                 <element signature="e#30#40#0" expanded="true" />
@@ -50,6 +50,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -61,7 +62,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -146,6 +146,16 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/procscan.py">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+          <folding>
+            <element signature="e#30#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/procscan.py">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="41" column="38" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
           <folding>
@@ -157,7 +167,7 @@
     <entry file="file://$PROJECT_DIR$/report1.json" />
     <entry file="file://$PROJECT_DIR$/procscan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1054">
+        <state relative-caret-position="17">
           <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
           <folding>
             <element signature="e#30#40#0" expanded="true" />

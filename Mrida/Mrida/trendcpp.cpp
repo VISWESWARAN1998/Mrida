@@ -160,13 +160,12 @@ const Tlsh * trendcpp::hash_file(std::string file_location)
 	return &th;
 }
 
-void trendcpp::add_threat_to_database(unsigned long int id, std::string tlsh_hash, std::string threat_name, unsigned long file_size, unsigned int file_type, unsigned int target_os)
+void trendcpp::add_threat_to_database(unsigned long int id, std::string tlsh_hash, std::string threat_name, unsigned long file_size, unsigned int file_type)
 {
 	try {
-		sqlite::database threat_database("threat_db.sqlite3");
-		threat_database << "create table if not exists threat(id unsigned bigint primary key, threat_hash text, threat_name text, threat_size unsigned int, threat_type unsigned int, target_os unsigned tinyint);";
-		threat_database << "insert into threat(id, threat_hash, threat_name, threat_size, threat_type, target_os) values(?, ?, ?, ?, ?, ?)" << id << tlsh_hash << threat_name << file_size << file_type << target_os;
-		threat_database << "SELECT * FROM threat WHERE editdist3(threat_hash, \"a\") < 600";
+		sqlite::database threat_database("threat_db.db");
+		threat_database << "create table if not exists threat(id unsigned bigint primary key, threat_hash text, threat_name text, threat_size unsigned int, threat_type unsigned int);";
+		threat_database << "insert into threat(id, threat_hash, threat_name, threat_size, threat_type) values(?, ?, ?, ?, ?)" << id << tlsh_hash << threat_name << file_size << file_type;
 	}
 	catch (std::exception &e)
 	{
@@ -184,4 +183,45 @@ int trendcpp::similarity_distance(std::string hash_one, std::string hash_two)
 	err2 = t2.fromTlshStr(hash_two.c_str());
 	if (err1 || err2) return -1;
 	return t1.totalDiff(&t2);
+}
+
+unsigned int trendcpp::mime_to_id(std::string mime_type)
+{
+	
+	sqlite::database db("threat_db.db");
+	db << "create table if not exists mime_table(mime text, id int)";
+	int count = 0;
+	db << "select count(id) from mime_table where mime=?" << mime_type >> count;
+	int max = 0;
+	db << "select max(id) from mime_table limit 1" >> max;
+	if (count == 0)
+	{
+		max++;
+		db << "insert into mime_table(mime, id) values(?, ?)" << mime_type << max;
+		return max;
+	}
+	else
+	{
+		unsigned int id;
+		db << "select id from mime_table where mime=? limit 1" << mime_type >> id;
+		return id;
+	}
+	return 0;
+}
+
+long trendcpp::matching_hash_from_threat_db(std::string tlsh_hash, std::string file_type, long file_size_minimum, unsigned long file_size_maximum)
+{
+	long matched_id = -1;
+	sqlite::database threat_table("threat_db.db");
+	threat_table << "create table if not exists threat(id unsigned bigint primary key, threat_hash text, threat_name text, threat_size unsigned int, threat_type unsigned int);";
+	unsigned int file_id = mime_to_id(file_type);
+	threat_table << "select id, threat_hash from threat where threat_size>=? and threat_size<=? and threat_type=?"
+		<< file_size_minimum << file_size_maximum << file_id >> [&] (unsigned long id, std::string threat_hash)
+		{
+			if (similarity_distance(tlsh_hash, threat_hash) < 20)
+			{
+				matched_id = id;
+			}
+		};
+	return matched_id;
 }

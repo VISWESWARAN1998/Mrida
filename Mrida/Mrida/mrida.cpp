@@ -209,6 +209,28 @@ int main(int argc, char** argv)
 		}
 	});
 
+	// Check threat database
+	server.Get("/check_threat_db", [](const httplib::Request& req, httplib::Response& res) {
+		bool is_hash_present = req.has_param("tlsh");
+		bool is_min_size_present = req.has_param("min_size");
+		bool is_max_size_present = req.has_param("max_size");
+		bool is_type_present = req.has_param("type");
+		if (is_hash_present && is_min_size_present && is_max_size_present && is_type_present)
+		{
+			print_terminal_info();
+			set_terminal_color(BLUE);
+			std::cout << "SENDING HASH MATCHING INFO\n";
+			set_terminal_color();
+			std::string tlsh_hash = req.get_param_value("tlsh");
+			long min_size = std::stoll(req.get_param_value("min_size"));
+			long max_size = std::stoll(req.get_param_value("max_size"));
+			std::string type = req.get_param_value("type");
+			trendcpp tlsh;
+			long id = tlsh.matching_hash_from_threat_db(tlsh_hash, type, min_size, max_size);
+			res.set_content(return_json(id), "application/json");
+		}
+	});
+
 	print_terminal_info();
 	std::cout << "Server started on: " << "127.0.0.1:" << 5660 << "\n";
 	server.listen("127.0.0.1", 5660);
