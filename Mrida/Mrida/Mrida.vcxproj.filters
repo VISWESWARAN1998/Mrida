@@ -58,6 +58,12 @@
     <Filter Include="Header Files\sqlite">
       <UniqueIdentifier>{1476b77a-d946-4eb0-8c36-7bc071e21628}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\database">
+      <UniqueIdentifier>{ed3ac172-1ffc-423c-941f-8ba5e2264b60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\database">
+      <UniqueIdentifier>{14d13d30-c066-4d00-9a96-fcd4c84557e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mrida.cpp">
@@ -96,6 +102,9 @@
     <ClCompile Include="trendcpp.cpp">
       <Filter>Source Files\trend</Filter>
     </ClCompile>
+    <ClCompile Include="threat_database.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="yara_scanner.h">
@@ -133,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="trendcpp.h">
       <Filter>Header Files\trend</Filter>
+    </ClInclude>
+    <ClInclude Include="threat_database.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

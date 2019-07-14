@@ -49,3 +49,12 @@ void success_print(std::string success_message)
 	std::cout << success_message;
 	set_terminal_color();
 }
+
+void clear_screen()
+{
+#ifdef _WIN32
+	system("cls");
+#else
+	system("clear");
+#endif // _WIN32
+}

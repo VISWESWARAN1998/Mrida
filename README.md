@@ -91,9 +91,16 @@ r.json()
 }
 ```
 
+# Check the threat database for matching hash. If nothing is matched will return -1
+```python
+r = requests.get("http://127.0.0.1:5660/check_threat_db?tlsh=FC55ADF47998802EC02A4437B961A6D96B307C975C865813FEA8BB1D3CEF160FD09677&min_size=3500&max_size=3543005&type=application/x-msdownload")
+r.json()
+```
+
 The antivirus makes use of the following opensource libraries:
 
 1. [YARA by VirusTotal](https://github.com/VirusTotal/yara)
 2. [YARA wrapper for C++ by Avast](https://github.com/avast/yaracpp)
 3. [JSON for C++ by Niels Lohmann](https://github.com/nlohmann/json)
 4. [HTTP library for C++ by yhirose](https://github.com/yhirose/cpp-httplib)
+5. [TLSH by trendmicro](https://github.com/trendmicro/tlsh)

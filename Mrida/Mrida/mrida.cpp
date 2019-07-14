@@ -15,6 +15,7 @@
 #include "yara_error_checker.h"
 #include "web_blocker.h"
 #include "trendcpp.h"
+#include "threat_database.h"
 
 
 int main(int argc, char** argv)
@@ -229,6 +230,13 @@ int main(int argc, char** argv)
 			long id = tlsh.matching_hash_from_threat_db(tlsh_hash, type, min_size, max_size);
 			res.set_content(return_json(id), "application/json");
 		}
+	});
+
+	// Removing duplicates in threat database
+	server.Get("/refactor_threat_db", [](const httplib::Request& req, httplib::Response& res) {
+		threat_database db;
+		db.refactor();
+		res.set_content(send_success_response(), "application/json");
 	});
 
 	print_terminal_info();

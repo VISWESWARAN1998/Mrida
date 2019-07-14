@@ -130,6 +130,7 @@
     <ClCompile Include="response.cpp" />
     <ClCompile Include="shannon_entropy.cpp" />
     <ClCompile Include="sqlite3.c" />
+    <ClCompile Include="threat_database.cpp" />
     <ClCompile Include="threat_info.cpp" />
     <ClCompile Include="trendcpp.cpp" />
     <ClCompile Include="web_blocker.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="response.h" />
     <ClInclude Include="shannon_entropy.h" />
     <ClInclude Include="sqlite3.h" />
+    <ClInclude Include="threat_database.h" />
     <ClInclude Include="threat_info.h" />
     <ClInclude Include="trendcpp.h" />
     <ClInclude Include="web_blocker.h" />

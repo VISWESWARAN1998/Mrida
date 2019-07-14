@@ -25,5 +25,8 @@ void error_print(std::string error_message);
 // Print success message to the console
 void success_print(std::string success_message);
 
+// Clear the screen
+void clear_screen();
+
 
 
