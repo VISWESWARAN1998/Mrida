@@ -4,7 +4,7 @@ import os
 import requests
 import filetype
 from PyQt5.QtWidgets import QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QWidget, QListWidget
-from PyQt5.QtWidgets import QFileDialog, QCheckBox, QListWidgetItem
+from PyQt5.QtWidgets import QFileDialog, QCheckBox, QListWidgetItem, QMessageBox
 from PyQt5.QtCore import QThread, QDir, QDirIterator, pyqtSignal, pyqtSlot
 
 
@@ -30,6 +30,9 @@ class DetectionWidget(QWidget):
     def is_checked(self):
         return self.select_threat.isChecked()
 
+    def get_path(self):
+        return self.path.text()
+
 
 class ScanThread(QThread):
 
@@ -51,6 +54,7 @@ class ScanThread(QThread):
                 self.scanning_signal.emit("[SCANNING]: "+file_name[1])
                 self.scan_for_yara(path=path)
                 self.scan_for_tlsh(path=path)
+        self.scanning_signal.emit(None)
 
     def scan_for_yara(self, path):
         r = requests.post("http://127.0.0.1:5660/scan_file_for_yara", data={"file": path, "target": "all"})
@@ -114,7 +118,9 @@ class ScanWidget(QWidget):
         main_layout.addWidget(self.scan_result)
         detection_layout = QHBoxLayout()
         delete_selected = QPushButton("DELETE SELECTED")
+        delete_selected.clicked.connect(self.delete_selected_clicked)
         delete_all = QPushButton("DELETE ALL")
+        delete_all.clicked.connect(self.delete_all_clicked)
         detection_layout.addWidget(delete_selected)
         detection_layout.addWidget(delete_all)
         main_layout.addLayout(detection_layout)
@@ -130,10 +136,14 @@ class ScanWidget(QWidget):
 
     @pyqtSlot(str)
     def scanning_slot(self, value):
-        self.status.setText(value)
+        if value:
+            self.status.setText(value)
+        else:
+            QMessageBox.information(self, "Mrida", "Scan has been completed!")
 
     @pyqtSlot(dict)
     def detection_slot(self, value):
+        self.scan_result.scrollToBottom()
         item = QListWidgetItem(self.scan_result)
         widget = DetectionWidget(path=value["path"], author=value["author"], name=value["name"],
                                  description=value["description"])
@@ -142,3 +152,26 @@ class ScanWidget(QWidget):
 
     def stop_clicked(self):
         self.scan_thread.terminate()
+
+    def delete_selected_clicked(self):
+        paths = []
+        for i in range(self.scan_result.count()):
+            widget = self.scan_result.itemWidget(self.scan_result.item(i))
+            if widget.is_checked():
+                if os.path.exists(widget.get_path()):
+                    paths.append((widget.get_path(), i))
+        for path in paths:
+            if os.path.exists(path[0]):
+                os.remove(path[0])
+                self.scan_result.takeItem(path[1])
+
+    def delete_all_clicked(self):
+        paths = []
+        for i in range(self.scan_result.count()):
+            widget = self.scan_result.itemWidget(self.scan_result.item(i))
+            if os.path.exists(widget.get_path()):
+                paths.append((widget.get_path(), i))
+        for path in paths:
+            if os.path.exists(path[0]):
+                os.remove(path[0])
+                self.scan_result.takeItem(path[1])

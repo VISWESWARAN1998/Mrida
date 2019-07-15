@@ -226,7 +226,7 @@ int main(int argc, char** argv)
 			long min_size = std::stoll(req.get_param_value("min_size"));
 			long max_size = std::stoll(req.get_param_value("max_size"));
 			std::string type = req.get_param_value("type");
-			trendcpp tlsh;
+			threat_database tlsh;
 			long id = tlsh.matching_hash_from_threat_db(tlsh_hash, type, min_size, max_size);
 			res.set_content(return_json(id), "application/json");
 		}
@@ -236,6 +236,21 @@ int main(int argc, char** argv)
 	server.Get("/refactor_threat_db", [](const httplib::Request& req, httplib::Response& res) {
 		threat_database db;
 		db.refactor();
+		res.set_content(send_success_response(), "application/json");
+	});
+
+	// Add threat
+	server.Post("/add_threat", [](const httplib::Request& req, httplib::Response& res) {
+		std::string threat_hash = req.get_param_value("hash");
+		std::string name = req.get_param_value("name");
+		unsigned long size = std::stol(req.get_param_value("size"));
+		std::string type = req.get_param_value("type");
+		threat_database database;
+		database.add_threat_to_database(threat_hash, name, size, type);
+		print_terminal_info();
+		set_terminal_color(CYAN);
+		std::cout << "ADDED HASH\n";
+		set_terminal_color();
 		res.set_content(send_success_response(), "application/json");
 	});
 

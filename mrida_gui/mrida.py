@@ -4,6 +4,7 @@ import sys
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTabWidget
 from PyQt5.QtCore import Qt
 from scan import ScanWidget
+from update import UpdateWidget
 
 
 class MridaMainWidget(QTabWidget):
@@ -11,6 +12,7 @@ class MridaMainWidget(QTabWidget):
     def __init__(self):
         super().__init__()
         self.addTab(ScanWidget(), "Scan")
+        self.addTab(UpdateWidget(), "Update")
 
 
 class MridaMainWindow(QMainWindow):

@@ -144,7 +144,7 @@
       <Filter>Header Files\trend</Filter>
     </ClInclude>
     <ClInclude Include="threat_database.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\database</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
