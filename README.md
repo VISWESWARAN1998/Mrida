@@ -1,8 +1,8 @@
 # Mrida
 An opensource antivirus implementation - Successor of CyberGod KSGMPRH
 
-![NA]("/images/scan.png")
-![NA]("/images/update.png")
+![NA]("https://raw.githubusercontent.com/VISWESWARAN1998/Mrida/master/images/scan.png")
+![NA]("https://raw.githubusercontent.com/VISWESWARAN1998/Mrida/master/images/update.png")
 
 Mrida is an open source antivirus implementation which uses YARA and LSH to detect malicious programs. It is programmed using C++ 14.
 
